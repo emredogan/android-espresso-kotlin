@@ -23,6 +23,7 @@ class CreatNewDestinationTest {
     @Test
     fun createNewItem() {
 
+        //Creating some sample data to be filled in the app
         val location_name_antalya = "Antalya"
         val location_name_kapadokya = "Kapadokya"
         val season_name_summer = "Summer"
@@ -30,16 +31,21 @@ class CreatNewDestinationTest {
 
         val location_kapadokya = Destination(location_name_kapadokya, season_name_summer, MainActivity.activity.getDrawable(R.drawable.kapadokya))
         val location_antalya = Destination(location_name_antalya, season_name_spring, MainActivity.activity.getDrawable(R.drawable.kaputas))
+        ///
 
+        // Click on the button and fill up the values in the app
         onView(withId(R.id.addPlayerFab)).perform(click())
         onView(withId(R.id.location_name_edit_text)).perform(typeText(location_name_kapadokya))
         onView(withId(R.id.season_edit_text)).perform(typeText(season_name_summer))
 
+        //Some sleep functions are added only to (slow down) observe the test process in recording.
         try {
             Thread.sleep(700)
         } catch (e: InterruptedException) {
             e.printStackTrace()
         }
+
+        //Click on the save button, this will save the note.
         onView(withId(R.id.saveButton)).perform(click())
 
         try {
@@ -48,11 +54,14 @@ class CreatNewDestinationTest {
             e.printStackTrace()
         }
 
+        // After the note is saved assert that note exists in the database.
         val first_added_location = LocationDatabase.location_list.last()
         assertEquals(first_added_location.name, location_kapadokya.name)
         assertEquals(first_added_location.number, location_kapadokya.number)
         assert(first_added_location.drawableImage!!.equals(location_kapadokya.number))
 
+
+        // Same process is repeated to add the second item and check if it exists
         onView(withId(R.id.addPlayerFab)).perform(click())
         onView(withId(R.id.add_image_button)).perform(click())
         onView(withId(R.id.location_name_edit_text)).perform(typeText(location_name_antalya))
@@ -82,6 +91,7 @@ class CreatNewDestinationTest {
             e.printStackTrace()
         }
 
+        // After adding the items click the first item on the list
         onView(withId(R.id.playerRecyclerList))
             .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerViewAdapter.PlayerViewHolder>(0, click()))
 
@@ -91,6 +101,7 @@ class CreatNewDestinationTest {
             e.printStackTrace()
         }
 
+        // We also check when an item is clicked a snackbar together with the destination name should be displayed
         onView(withId(com.google.android.material.R.id.snackbar_text))
             .check(matches(withText("Kapadokya")))
 
