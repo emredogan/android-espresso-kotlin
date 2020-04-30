@@ -40,7 +40,7 @@ class CreatNewDestinationTest {
 
         //Some sleep functions are added only to (slow down) observe the test process in recording.
         try {
-            Thread.sleep(700)
+            Thread.sleep(3000)
         } catch (e: InterruptedException) {
             e.printStackTrace()
         }
@@ -49,7 +49,7 @@ class CreatNewDestinationTest {
         onView(withId(R.id.saveButton)).perform(click())
 
         try {
-            Thread.sleep(700)
+            Thread.sleep(3000)
         } catch (e: InterruptedException) {
             e.printStackTrace()
         }
@@ -68,14 +68,14 @@ class CreatNewDestinationTest {
         onView(withId(R.id.season_edit_text)).perform(typeText(season_name_spring))
 
         try {
-            Thread.sleep(700)
+            Thread.sleep(3000)
         } catch (e: InterruptedException) {
             e.printStackTrace()
         }
         onView(withId(R.id.saveButton)).perform(click())
 
         try {
-            Thread.sleep(700)
+            Thread.sleep(3000)
         } catch (e: InterruptedException) {
             e.printStackTrace()
         }
@@ -86,7 +86,7 @@ class CreatNewDestinationTest {
         assert(second_added_location.drawableImage!!.equals(location_antalya.number))
 
         try {
-            Thread.sleep(700)
+            Thread.sleep(3000)
         } catch (e: InterruptedException) {
             e.printStackTrace()
         }
@@ -96,7 +96,7 @@ class CreatNewDestinationTest {
             .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerViewAdapter.PlayerViewHolder>(0, click()))
 
         try {
-            Thread.sleep(700)
+            Thread.sleep(3000)
         } catch (e: InterruptedException) {
             e.printStackTrace()
         }
@@ -106,7 +106,7 @@ class CreatNewDestinationTest {
             .check(matches(withText("Kapadokya")))
 
         try {
-            Thread.sleep(700)
+            Thread.sleep(50000)
         } catch (e: InterruptedException) {
             e.printStackTrace()
         }
